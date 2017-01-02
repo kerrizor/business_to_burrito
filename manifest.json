@@ -1,7 +1,7 @@
 {
 "manifest_version": 2,
     "name": "business_to_burrito",
-    "description": "A Chrome extension which replaces the word 'business' with 'burrito'",
+    "description": "A Chrome extension which replaces the word 'business' with 'burrito'. Source code is available at https://github.com/kerrizor/business_to_burrito",
     "version": "0.1",
     "content_scripts": [
         {
