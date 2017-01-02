@@ -3,6 +3,9 @@
     "name": "Business to Burrito",
     "description": "A Chrome extension which replaces the word 'business' with 'burrito'.",
     "version": "0.1",
+    "author": "Kerri Miller",
+    "homepage_url": "http://github.com/kerrizor/business_to_burrito",
+    "short_name": "Business to Burrito",
     "content_scripts": [
         {
             "matches": [
