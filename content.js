@@ -15,7 +15,7 @@ function matchCase(text, pattern) {
     return result;
 }
 
-var elements = document.getElementsByTagName('*');
+var elements = document.querySelectorAll("body :not(script):not(input)");
 
 for (var i = 0; i < elements.length; i++) {
     var element = elements[i];
