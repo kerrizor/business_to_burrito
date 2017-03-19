@@ -21,18 +21,32 @@ function matchBurritoCase(match) {
     return matchCase("burrito", match);
 }
 
-var elements = document.querySelectorAll("body :not(script):not(input)");
+function replaceChildNodes(node) {
+    if (node.parentNode && node.nodeType === 3) {
+        var text = node.nodeValue;
+        var replacedText = text.replace(/business/gi, matchBurritoCase);
 
-[].forEach.call(elements, function (element) {
-    [].forEach.call(element.childNodes, function (node) {
-        if (node.nodeType === 3) {
-            var text = node.nodeValue;
-            var replacedText = text.replace(/business/gi, matchBurritoCase);
-
-            if (replacedText !== text) {
-                element.replaceChild(document.createTextNode(replacedText), node);
-            }
+        if (replacedText !== text) {
+            node.parentNode.replaceChild(document.createTextNode(replacedText), node);
         }
-    });
-});
+    }
+    Array.prototype.forEach.call(node.childNodes, replaceChildNodes);
+}
 
+if (!MutationObserver) {
+    // if MutationObserver is not supported, run it once on the document body
+    replaceChildNodes(document.body);
+} else {
+    var observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+            if (!mutation.addedNodes) return;
+
+            mutation.addedNodes.forEach(replaceChildNodes);
+        });
+    });
+
+    observer.observe(document.body, {
+        childList: true,
+        subtree: true
+    });
+}
